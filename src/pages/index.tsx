@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Chart from 'react-google-charts'
 
-export default function Home() {
+const Home = () => {
   const [producersList, setProducersList] = useState<ProducerFormValuesWithId[]>([])
   const [dashboardInfos, setDashboardInfos] = useState<DashboardInfos>()
 
@@ -46,11 +46,12 @@ export default function Home() {
                 renderItem={(item) => (
                   <List.Item
                     actions={[
-                      <Link href={`/edit/${item.id}`} >
+                      <Link key="link-edit" href={`/edit/${item.id}`} >
                         <Button type='text' icon={<EditTwoTone />} />
                       </Link>,
                       <Button
                         type='text'
+                        key="button-delete"
                         icon={<DeleteTwoTone twoToneColor="#eb2f58" />}
                         onClick={() => deleteFarm(item.id)}
                       />
@@ -120,3 +121,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

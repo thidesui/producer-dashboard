@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { producersFormMock, simulateEndpoint } from "@/services/mockup"
 
-export default () => {
+const EditPage = () => {
     const [createProducerForm] = Form.useForm<ProducerFormValues>()
     const [buttonLoading, setButtonLoading] = useState(false)
     const router = useRouter();
@@ -34,6 +34,7 @@ export default () => {
 
         if (producerFound) createProducerForm.setFieldsValue(producerFound)
         else router.push('/')
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router.query.id])
 
     return <>
@@ -65,3 +66,5 @@ export default () => {
         </Layout>
     </>
 }
+
+export default EditPage

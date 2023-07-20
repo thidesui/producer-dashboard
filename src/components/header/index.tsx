@@ -4,7 +4,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { useRouter } from 'next/router'
 
-export default ({ title, home }: HeaderProps) => {
+const HeaderComponent = ({ title, home }: HeaderProps) => {
     const router = useRouter();
 
     return <Styled.Header>
@@ -21,3 +21,5 @@ export default ({ title, home }: HeaderProps) => {
         </span>
     </Styled.Header>
 }
+
+export default HeaderComponent

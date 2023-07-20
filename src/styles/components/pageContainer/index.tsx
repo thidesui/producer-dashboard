@@ -6,4 +6,6 @@ const Content = styled(Layout.Content)`
     padding: 32px 0;
 `
 
-export default { Content }
+const PageContainerStyles = { Content }
+
+export default PageContainerStyles

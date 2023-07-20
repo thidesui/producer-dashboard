@@ -3,7 +3,7 @@ import formService from "@/services/formService"
 import { Form, Input, Select } from "antd"
 import { RuleObject } from "antd/es/form"
 
-export default ({ form, sendForm }: ProducerFormProps) => {
+const ProducerForm = ({ form, sendForm }: ProducerFormProps) => {
     const formatCpfCnpj = (ev: { target: { value: string } }) => {
         form.setFieldValue('cpfCnpj', formService.formatCpfCnpj(ev.target.value))
     }
@@ -100,3 +100,5 @@ export default ({ form, sendForm }: ProducerFormProps) => {
         </Form>
     </>
 }
+
+export default ProducerForm

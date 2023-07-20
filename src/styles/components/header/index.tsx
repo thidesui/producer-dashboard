@@ -6,4 +6,6 @@ const Header = styled(Layout.Header)`
     text-transform: uppercase;
 `
 
-export default { Header }
+const HeaderStyles = { Header }
+
+export default HeaderStyles

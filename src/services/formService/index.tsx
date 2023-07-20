@@ -110,4 +110,6 @@ const acreValidator = ({ totalAcre, arableAcre, vegetationAcre }: ProducerFormVa
         return 'A soma de área agricultável e vegetação, não deverá ser maior que a área total da fazenda'
 }
 
-export default { formSettings, plantedCropsOptions, cpfCnpjValidator, formatCpfCnpj, acreValidator }
+const FormService = { formSettings, plantedCropsOptions, cpfCnpjValidator, formatCpfCnpj, acreValidator }
+
+export default FormService

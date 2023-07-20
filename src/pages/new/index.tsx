@@ -8,7 +8,7 @@ import { useState } from "react"
 import { useRouter } from "next/router"
 import { simulateEndpoint } from "@/services/mockup"
 
-export default () => {
+const NewPage = () => {
     const [createProducerForm] = Form.useForm<ProducerFormValues>()
     const [buttonLoading, setButtonLoading] = useState(false)
     const router = useRouter();
@@ -56,3 +56,5 @@ export default () => {
         </Layout>
     </>
 }
+
+export default NewPage
