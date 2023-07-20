@@ -4,9 +4,9 @@ import Head from "next/head"
 import Header from "@/components/header"
 import PageContainer from "@/components/pageContainer"
 import { ProducerFormValues } from "@/interfaces/components/producerForm"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { simulateEndpoint } from "@/services/mockup"
+import { producersFormMock, simulateEndpoint } from "@/services/mockup"
 
 export default () => {
     const [createProducerForm] = Form.useForm<ProducerFormValues>()
@@ -16,22 +16,31 @@ export default () => {
     const sendForm = () => {
         setButtonLoading(true)
 
-        simulateEndpoint().then(a => {
+        simulateEndpoint().then(_ => {
             setButtonLoading(false)
 
             Modal.success({
-                content: 'Produtor criado com sucesso!',
+                content: 'Dados atualizados com sucesso!',
                 centered: true,
                 afterClose: () => router.push('/')
             });
         })
     }
 
+    useEffect(() => {
+        if (!router.query.id) return
+
+        const producerFound = producersFormMock.find(producer => producer.id === router.query.id)
+
+        if (producerFound) createProducerForm.setFieldsValue(producerFound)
+        else router.push('/')
+    }, [router.query.id])
+
     return <>
-        <Head><title>Criar produtor</title></Head>
+        <Head><title>Editar produtor</title></Head>
 
         <Layout>
-            <Header title="Criar produtor" />
+            <Header title="Editar produtor" />
 
             <PageContainer>
                 <Row>
