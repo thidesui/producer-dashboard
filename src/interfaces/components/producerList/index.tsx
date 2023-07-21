@@ -1,4 +1,4 @@
-import { ProducerWithId } from "../producerForm"
+import { ProducerWithId } from '../producerForm'
 
 export interface ProducerListProps {
     producerList: ProducerWithId[]

@@ -1,14 +1,14 @@
-import Header from "@/components/header"
-import PageContainer from "@/components/pageContainer"
-import ProducerList from "@/components/producerList"
-import { ProducerWithId } from "@/interfaces/components/producerForm"
-import { DashboardInfos } from "@/interfaces/services/dashboardService"
-import { generateDashboardInfos } from "@/services/dashboardService"
-import ProducersService from "@/services/producersService"
-import { Card, Col, Divider, Layout, List, Modal, Row, Statistic } from "antd"
-import Head from "next/head"
-import { useEffect, useState } from "react"
-import Chart from "react-google-charts"
+import Header from '@/components/header'
+import PageContainer from '@/components/pageContainer'
+import ProducerList from '@/components/producerList'
+import { ProducerWithId } from '@/interfaces/components/producerForm'
+import { DashboardInfos } from '@/interfaces/services/dashboardService'
+import { generateDashboardInfos } from '@/services/dashboardService'
+import ProducersService from '@/services/producersService'
+import { Card, Col, Divider, Layout, List, Modal, Row, Statistic } from 'antd'
+import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import Chart from 'react-google-charts'
 
 // Tela home/dashboard, contém lista dos produtores e gráficos
 const Dashboard = () => {
@@ -29,7 +29,7 @@ const Dashboard = () => {
       getProducerList()
     }).catch(_ => {
       Modal.error({
-        content: "Houve um erro ao excluir este produtor. Por favor, tente novamente!",
+        content: 'Houve um erro ao excluir este produtor. Por favor, tente novamente!',
         centered: true
       });
     })
@@ -54,8 +54,8 @@ const Dashboard = () => {
           <List
             grid={{ gutter: 16, column: 2 }}
             dataSource={[
-              { title: "Total de fazendas em quantidade", value: dashboardInfos?.totalFarm },
-              { title: "Total de fazendas em hectares (área total)", value: dashboardInfos?.totalHectare }
+              { title: 'Total de fazendas em quantidade', value: dashboardInfos?.totalFarm },
+              { title: 'Total de fazendas em hectares (área total)', value: dashboardInfos?.totalHectare }
             ]}
             renderItem={(item) => (
               < List.Item >
@@ -77,9 +77,9 @@ const Dashboard = () => {
           <List
             grid={{ gutter: 16, column: 2 }}
             dataSource={[
-              { title: "Fazendas por estado", value: dashboardInfos?.farmPerState },
-              { title: "Distribuição de cultura", value: dashboardInfos?.cropsQtd },
-              { title: "Uso do solo", value: dashboardInfos?.hectareUtilization }
+              { title: 'Fazendas por estado', value: dashboardInfos?.farmPerState },
+              { title: 'Distribuição de cultura', value: dashboardInfos?.cropsQtd },
+              { title: 'Uso do solo', value: dashboardInfos?.hectareUtilization }
             ]}
             renderItem={(item) => (
               <List.Item>
@@ -89,7 +89,7 @@ const Dashboard = () => {
                     width='100%'
                     height='300px'
                     options={{ title: item.title }}
-                    data={[["Item", "Value"], ...(item.value?.map(a => ([a.label, a.qtd])) || [])]}
+                    data={[['Item', 'Value'], ...(item.value?.map(a => ([a.label, a.qtd])) || [])]}
                   />
                 </Card>
               </List.Item>

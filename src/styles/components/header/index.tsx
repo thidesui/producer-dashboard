@@ -1,5 +1,5 @@
-import { Layout } from "antd";
-import styled from "styled-components";
+import { Layout } from 'antd';
+import styled from 'styled-components';
 
 const Header = styled(Layout.Header)`
     color: #fff;

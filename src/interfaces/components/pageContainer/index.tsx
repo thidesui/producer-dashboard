@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface PageContainerProps {
-    children: JSX.Element[]
+    children: React.JSX.Element[]
 }

@@ -1,6 +1,33 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended"
+  ],
   "rules": {
-    "quotes": "warn"
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "space-before-blocks": "warn",
+    "space-before-function-paren": [
+      "warn",
+      "never"
+    ],
+    "space-in-parens": "warn",
+    "space-infix-ops": "warn",
+    "space-unary-ops": "warn",
+    "spaced-comment": "warn",
+    "implicit-arrow-linebreak": "warn",
+    "key-spacing": "warn",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ]
   }
 }

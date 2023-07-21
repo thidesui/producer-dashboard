@@ -1,4 +1,4 @@
-import { FormInstance } from "antd";
+import { FormInstance } from 'antd';
 
 export interface ProducerFormProps {
     form: FormInstance<ProducerFormValues>
