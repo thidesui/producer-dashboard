@@ -1,9 +1,8 @@
 import { FormInstance } from "antd";
-import { Subject } from "rxjs";
 
 export interface ProducerFormProps {
     form: FormInstance<ProducerFormValues>
-    sendForm: Function
+    submitForm: Function
 }
 
 export interface ProducerFormValues {
@@ -12,12 +11,12 @@ export interface ProducerFormValues {
     farmName: string
     city: string
     state: string
-    totalAcre: string
-    arableAcre: string
-    vegetationAcre: string
+    totalHectare: string
+    arableHectare: string
+    vegetationHectare: string
     plantedCrops: string[]
 }
 
-export interface ProducerFormValuesWithId extends ProducerFormValues {
+export interface ProducerWithId extends ProducerFormValues {
     id: string
 }

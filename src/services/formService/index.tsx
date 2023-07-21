@@ -1,15 +1,15 @@
-import { ProducerFormValues } from '@/interfaces/components/producerForm';
-import { FormProps } from 'antd'
-import { RuleObject } from 'antd/es/form';
+import { ProducerFormValues } from "@/interfaces/components/producerForm";
+import { FormProps } from "antd"
+import { RuleObject } from "antd/es/form";
 
 const formSettings: FormProps = {
-    validateMessages: { required: '${label} é obrigatório!' }
+    validateMessages: { required: "${label} é obrigatório!" }
 }
 
-const plantedCropsOptions = ['Soja', 'Milho', 'Algodão', 'Café', 'Cana de Açucar'].map(a => ({ label: a, value: a }))
+const plantedCropsOptions = ["Soja", "Milho", "Algodão", "Café", "Cana de Açucar"].map(a => ({ label: a, value: a }))
 
 const validateCPF = (cpf: string) => {
-    if (cpf == '') return false;
+    if (cpf == "") return false;
     if (cpf.length != 11 ||
         cpf == "00000000000" ||
         cpf == "11111111111" ||
@@ -42,8 +42,8 @@ const validateCPF = (cpf: string) => {
 }
 
 const validateCNPJ = (cnpj: string) => {
-    cnpj = cnpj.replace(/[^\d]+/g, '');
-    if (cnpj == '') return false;
+    cnpj = cnpj.replace(/[^\d]+/g, "");
+    if (cnpj == "") return false;
     if (cnpj.length != 14)
         return false;
     if (cnpj == "00000000000000" ||
@@ -88,28 +88,28 @@ const validateCNPJ = (cnpj: string) => {
 const cpfCnpjValidator = (_rule: RuleObject, value: string, cb: (msg?: string) => void) => {
     if (!value) return
 
-    const cleanInput = value.replace(/[^\d]+/g, '');
+    const cleanInput = value.replace(/[^\d]+/g, "");
 
-    if (cleanInput?.length === 11) { if (!validateCPF(cleanInput)) return cb('CPF inválido') }
-    else if (cleanInput?.length === 14) { if (!validateCNPJ(cleanInput)) return cb('CNPJ inválido') }
-    else return cb('Por favor, digite um CPF ou um CNPJ válido')
+    if (cleanInput?.length === 11) { if (!validateCPF(cleanInput)) return cb("CPF inválido") }
+    else if (cleanInput?.length === 14) { if (!validateCNPJ(cleanInput)) return cb("CNPJ inválido") }
+    else return cb("Por favor, digite um CPF ou um CNPJ válido")
 
     return Promise.resolve()
 }
 
 const formatCpfCnpj = (value: string) => {
-    const cleanInput = value.replace(/[^\d]+/g, '');
+    const cleanInput = value.replace(/[^\d]+/g, "");
 
     if (cleanInput?.length === 11) return cleanInput.replace(/(\d{3})?(\d{3})?(\d{3})?(\d{2})/, "$1.$2.$3-$4")
     else if (cleanInput?.length === 14) return cleanInput.replace(/(\d{2})?(\d{3})?(\d{3})?(\d{4})?(\d{2})/, "$1.$2.$3/$4-$5")
     else return cleanInput
 }
 
-const acreValidator = ({ totalAcre, arableAcre, vegetationAcre }: ProducerFormValues) => {
-    if (totalAcre && (Number(arableAcre) + Number(vegetationAcre)) > Number(totalAcre))
-        return 'A soma de área agricultável e vegetação, não deverá ser maior que a área total da fazenda'
+const hectareValidator = ({ totalHectare, arableHectare, vegetationHectare }: ProducerFormValues) => {
+    if (totalHectare && (Number(arableHectare) + Number(vegetationHectare)) > Number(totalHectare))
+        return "A soma de área agricultável e vegetação, não deverá ser maior que a área total da fazenda"
 }
 
-const FormService = { formSettings, plantedCropsOptions, cpfCnpjValidator, formatCpfCnpj, acreValidator }
+const FormService = { formSettings, plantedCropsOptions, cpfCnpjValidator, formatCpfCnpj, hectareValidator }
 
 export default FormService

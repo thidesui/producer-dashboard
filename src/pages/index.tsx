@@ -1,125 +1,106 @@
-import Header from '@/components/header'
-import PageContainer from '@/components/pageContainer'
-import { ProducerFormValuesWithId } from '@/interfaces/components/producerForm'
-import { DashboardInfos, generateDashboardInfos, producersFormMock } from '@/services/mockup'
-import { DeleteTwoTone, EditTwoTone } from '@ant-design/icons'
-import { Button, Card, Col, Divider, Layout, List, Row, Statistic } from 'antd'
-import Head from 'next/head'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import Chart from 'react-google-charts'
+import Header from "@/components/header"
+import PageContainer from "@/components/pageContainer"
+import ProducerList from "@/components/producerList"
+import { ProducerWithId } from "@/interfaces/components/producerForm"
+import { DashboardInfos } from "@/interfaces/services/dashboardService"
+import { generateDashboardInfos } from "@/services/dashboardService"
+import ProducersService from "@/services/producersService"
+import { Card, Col, Divider, Layout, List, Modal, Row, Statistic } from "antd"
+import Head from "next/head"
+import { useEffect, useState } from "react"
+import Chart from "react-google-charts"
 
-const Home = () => {
-  const [producersList, setProducersList] = useState<ProducerFormValuesWithId[]>([])
+// Tela home/dashboard, contém lista dos produtores e gráficos
+const Dashboard = () => {
+  const [producerList, setProducerList] = useState<ProducerWithId[]>([])
   const [dashboardInfos, setDashboardInfos] = useState<DashboardInfos>()
 
-  useEffect(() => {
-    setProducersList(producersFormMock)
-    setDashboardInfos(generateDashboardInfos(producersFormMock))
-  }, [])
-
-  const deleteFarm = (id: string) => {
-    const producersListUpdated = producersList.filter(producer => producer.id !== id)
-    setProducersList(producersListUpdated)
-    setDashboardInfos(generateDashboardInfos(producersListUpdated))
+  const getProducerList = () => {
+    ProducersService.GetProducerList().then((producerList) => {
+      setProducerList(producerList)
+      setDashboardInfos(generateDashboardInfos(producerList))
+    })
   }
 
-  return (
-    <>
-      <Head>
-        <title>Dashboard</title>
-      </Head>
+  useEffect(() => { getProducerList() }, [])
 
-      <Layout>
-        <Header title="Dashboard" home />
+  const deleteFarm = (id: string) => {
+    ProducersService.DeleteProducerById(id).then(_ => {
+      getProducerList()
+    }).catch(_ => {
+      Modal.error({
+        content: "Houve um erro ao excluir este produtor. Por favor, tente novamente!",
+        centered: true
+      });
+    })
+  }
 
-        <PageContainer>
-          <Row>
-            <Col offset={2} span={20}>
-              <List
-                header={<h3>Fazendas</h3>}
-                footer={<Link href="/new"><Button type="primary">Adicionar nova fazenda</Button></Link>}
-                bordered
-                style={{ backgroundColor: 'white' }}
-                dataSource={producersList}
-                locale={{ emptyText: "Sem fazendas cadastradas!" }}
-                renderItem={(item) => (
-                  <List.Item
-                    actions={[
-                      <Link key="link-edit" href={`/edit/${item.id}`} >
-                        <Button type='text' icon={<EditTwoTone />} />
-                      </Link>,
-                      <Button
-                        type='text'
-                        key="button-delete"
-                        icon={<DeleteTwoTone twoToneColor="#eb2f58" />}
-                        onClick={() => deleteFarm(item.id)}
-                      />
-                    ]}
-                  >
-                    {item.farmName}
-                  </List.Item>)}
-              >
-              </List>
-            </Col>
-          </Row>
+  return <Layout>
+    <Head><title>Dashboard</title></Head>
 
-          <Divider />
+    <Header title="Dashboard" home />
 
-          <Row>
-            <Col offset={2} span={20}>
-              <List
-                grid={{ gutter: 16, column: 2 }}
-                dataSource={[
-                  { title: 'Total de fazendas em quantidade', value: dashboardInfos?.totalFarm },
-                  { title: 'Total de fazendas em hectares (área total)', value: dashboardInfos?.totalHectare }
-                ]}
-                renderItem={(item) => (
-                  < List.Item >
-                    <Card bordered={false}>
-                      <Statistic title={item.title} value={item.value} />
-                    </Card>
-                  </List.Item>
-                )}
-              >
-              </List>
-            </Col>
-          </Row>
+    <PageContainer>
+      <Row>
+        <Col offset={2} span={20}>
+          <ProducerList deleteFarm={deleteFarm} producerList={producerList} />
+        </Col>
+      </Row>
 
-          <Divider />
+      <Divider />
+
+      <Row>
+        <Col offset={2} span={20}>
+          <List
+            grid={{ gutter: 16, column: 2 }}
+            dataSource={[
+              { title: "Total de fazendas em quantidade", value: dashboardInfos?.totalFarm },
+              { title: "Total de fazendas em hectares (área total)", value: dashboardInfos?.totalHectare }
+            ]}
+            renderItem={(item) => (
+              < List.Item >
+                <Card bordered={false}>
+                  <Statistic title={item.title} value={item.value} />
+                </Card>
+              </List.Item>
+            )}
+          >
+          </List>
+        </Col>
+      </Row>
+
+      <Divider />
 
 
-          <Row>
-            <Col offset={2} span={20}>
-              <List
-                grid={{ gutter: 16, column: 2 }}
-                dataSource={[
-                  { title: 'Fazendas por estado', value: dashboardInfos?.farmPerState },
-                  { title: 'Distribuição de cultura', value: dashboardInfos?.cropsQtd },
-                  { title: 'Uso do solo', value: dashboardInfos?.acreUtilization }
-                ]}
-                renderItem={(item) => (
-                  <List.Item>
-                    <Card bordered={false}>
-                      <Chart
-                        chartType='PieChart'
-                        width='100%'
-                        height='300px'
-                        options={{ title: item.title }}
-                        data={[['Item', 'Value'], ...(item.value?.map(a => ([a.label, a.qtd])) || [])]}
-                      />
-                    </Card>
-                  </List.Item>
-                )}
-              >
-              </List>
-            </Col>
-          </Row>
+      <Row>
+        <Col offset={2} span={20}>
+          <List
+            grid={{ gutter: 16, column: 2 }}
+            dataSource={[
+              { title: "Fazendas por estado", value: dashboardInfos?.farmPerState },
+              { title: "Distribuição de cultura", value: dashboardInfos?.cropsQtd },
+              { title: "Uso do solo", value: dashboardInfos?.hectareUtilization }
+            ]}
+            renderItem={(item) => (
+              <List.Item>
+                <Card bordered={false}>
+                  <Chart
+                    chartType='PieChart'
+                    width='100%'
+                    height='300px'
+                    options={{ title: item.title }}
+                    data={[["Item", "Value"], ...(item.value?.map(a => ([a.label, a.qtd])) || [])]}
+                  />
+                </Card>
+              </List.Item>
+            )}
+          >
+          </List>
+        </Col>
+      </Row>
 
-        </PageContainer >
-      </Layout >
-    </>
-  )
+    </PageContainer >
+  </Layout >
 }
 
-export default Home
+export default Dashboard
