@@ -1,38 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Rodando o projeto
 
-## Getting Started
-
-First, run the development server:
+Primeiro, instale as dependências:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npm  i
+#ou
+npm  install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Depois, rode o projeto em modo desenvolvimento:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+npm  run  dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Projeto hospedado
+Front-end hospedado no firebase: [https://teste-react-visa.web.app/](https://teste-react-visa.web.app/)
+BFF (jsonServer) hospedado no Heroku: [https://teste-node-xp-29ebae133506.herokuapp.com/producers/](https://teste-node-xp-29ebae133506.herokuapp.com/producers/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Detalhamento do projeto
 
-## Learn More
+### Página Dashboard
+- Lista de produtores 
+  - Botões de criar novo, editar e deletar
+- Estatísticas 
+  - Total de fazendas em quantidade
+  - Total de fazendas em hectares (área total)
+- Gráficos
+  - Gráfico de pizza por estado.
+  - Gráfico de pizza por cultura.
+  - Gráfico de pizza por uso de solo (Área agricultável e vegetação)  
 
-To learn more about Next.js, take a look at the following resources:
+### Página Criar produtor
+ Cadastro com os seguintes campos (todos obrigatórios):
+  - CPF ou CNPJ
+    - Validação de CPF e de CNPJ
+    - Formatação de CPF e CNPJ
+  - Nome do produtor
+  - Nome da Fazenda
+  - Cidade
+  - Estado
+  - Área total em hectares da fazenda
+    - Validação de que os dois campos seguintes somados não ultrapassem o valor total
+  - Área agricultável em hectares
+  - Área de vegetação em hectares
+  - Culturas plantadas (multi-select)
+    - Soja
+    - Milho
+    - Algodão
+    - Café
+    - Cana de Açucar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Página Editar produtor
+Possui os mesmos campos de [criação](#Criar-produtor), porém vêm com o formulário já preenchido.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### [BFF](/bff)
+Foi utilizado a biblioteca [JSONServer](https://www.npmjs.com/package/json-server) para a sua criação.
