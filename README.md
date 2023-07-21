@@ -3,15 +3,15 @@
 Primeiro, instale as dependências:
 
 ```bash
-npm  i
+npm i
 #ou
-npm  install
+npm install
 ```
 
 Depois, rode o projeto em modo desenvolvimento:
 
 ```bash
-npm  run  dev
+npm run dev
 ```
 
 Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
