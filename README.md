@@ -14,10 +14,10 @@ Depois, rode o projeto em modo desenvolvimento:
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
+Acesse [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
 ## Projeto hospedado
-Front-end hospedado no firebase: [https://teste-react-visa.web.app/](https://teste-react-visa.web.app/)
+Front-end hospedado no firebase: [https://teste-react-visa.web.app/](https://teste-react-visa.web.app/)<br>
 BFF (jsonServer) hospedado no Heroku: [https://teste-node-xp-29ebae133506.herokuapp.com/producers/](https://teste-node-xp-29ebae133506.herokuapp.com/producers/)
 
 ## Detalhamento do projeto
