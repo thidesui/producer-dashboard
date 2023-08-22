@@ -1,6 +1,6 @@
 import { ProducerFormValues, ProducerWithId } from '@/interfaces/components/producerForm'
 
-const bffBasePath = 'https://producer-dashboard-36234e911557.herokuapp.com/'
+const bffBasePath = 'https://producer-dashboard-36234e911557.herokuapp.com'
 
 const GetProducerList = async(): Promise<ProducerWithId[]> => {
   const producerList = await fetch(`${bffBasePath}/producers`)
