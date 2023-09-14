@@ -1,14 +1,14 @@
 import { ProducerFormValues, ProducerWithId } from '@/interfaces/components/producerForm'
 
-const bffBasePath = 'https://producer-dashboard-36234e911557.herokuapp.com'
+const bffBasePath = 'https://bffjsonserver-z37l2ehg4q-uc.a.run.app'
 
-const GetProducerList = async(): Promise<ProducerWithId[]> => {
+const GetProducerList = async (): Promise<ProducerWithId[]> => {
   const producerList = await fetch(`${bffBasePath}/producers`)
 
   return await producerList.json()
 }
 
-const GetProducerById = async(id: string): Promise<ProducerWithId> => {
+const GetProducerById = async (id: string): Promise<ProducerWithId> => {
   const producerFound = await fetch(`${bffBasePath}/producers/${id}`)
 
   if (producerFound.status !== 200)
@@ -17,7 +17,7 @@ const GetProducerById = async(id: string): Promise<ProducerWithId> => {
   return await producerFound.json()
 }
 
-const UpdateProducerById = async(id: string, producer: ProducerFormValues): Promise<ProducerWithId> => {
+const UpdateProducerById = async (id: string, producer: ProducerFormValues): Promise<ProducerWithId> => {
   const producerUpdated = await fetch(`${bffBasePath}/producers/${id}`, {
     method: 'PATCH',
     body: JSON.stringify(producer),
@@ -30,7 +30,7 @@ const UpdateProducerById = async(id: string, producer: ProducerFormValues): Prom
   return producerUpdated.json()
 }
 
-const DeleteProducerById = async(id: string): Promise<void> => {
+const DeleteProducerById = async (id: string): Promise<void> => {
   const producerUpdated = await fetch(`${bffBasePath}/producers/${id}`, {
     method: 'DELETE'
   })
@@ -41,7 +41,7 @@ const DeleteProducerById = async(id: string): Promise<void> => {
   return producerUpdated.json()
 }
 
-const CreateNewProducer = async(producer: ProducerFormValues): Promise<ProducerWithId> => {
+const CreateNewProducer = async (producer: ProducerFormValues): Promise<ProducerWithId> => {
   const producerCreated = await fetch(`${bffBasePath}/producers`, {
     method: 'POST',
     body: JSON.stringify(producer),

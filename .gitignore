@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /bff/node_modules
+/functions/node_modules
 /.pnp
 .pnp.js
 
@@ -15,6 +16,9 @@
 
 # production
 /build
+/functions/lib/db.json
+/functions/lib/index.js
+/functions/lib/index.js.map
 
 # misc
 .DS_Store
