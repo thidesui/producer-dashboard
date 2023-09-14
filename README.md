@@ -17,8 +17,9 @@ npm run dev
 Acesse [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
 
 ## Projeto hospedado
-Front-end hospedado no firebase: [https://teste-react-visa.web.app/](https://teste-react-visa.web.app/)<br>
-BFF (jsonServer) hospedado no Heroku: [https://teste-node-xp-29ebae133506.herokuapp.com/producers/](https://teste-node-xp-29ebae133506.herokuapp.com/producers/)
+Front-end hospedado no firebase: [https://producer-dashboard.web.app/](https://producer-dashboard.web.app/)<br>
+(Url alternativa): [https://producer-dashboard.firebaseapp.com/](https://producer-dashboard.firebaseapp.com/)<br>
+BFF (jsonServer) hospedado no firebase functions: [https://bffjsonserver-z37l2ehg4q-uc.a.run.app/producers/](https://bffjsonserver-z37l2ehg4q-uc.a.run.app/producers/)
 
 ## Detalhamento do projeto
 
