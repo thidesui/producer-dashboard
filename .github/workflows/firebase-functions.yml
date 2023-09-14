@@ -3,6 +3,8 @@ name: Deploy to Firebase Functions
   push:
     branches:
       - main
+    paths:
+      - 'functions/**'
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
