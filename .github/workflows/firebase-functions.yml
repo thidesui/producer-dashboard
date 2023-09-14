@@ -10,8 +10,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Deploy to Firebase
-        uses: jsryudev/deploy-firebase-functions@v0.0.2
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          FIREBASE_PROJECT: producer-dashboard
+      - name: Create SA key
+        run: echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRODUCER_DASHBOARD }}' > $HOME/gcloud.json
+      
+      - name: Deploy Cloud Functions
+        run: export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcloud.json && npx firebase-tools deploy --only functions --json
+
+
+          
