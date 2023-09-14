@@ -13,5 +13,4 @@ server.use(jsonServer.bodyParser)
 server.use(middlewares)
 server.use(router)
 
-// Test change on Functions
 export const bffJsonServer = onRequest(server);
