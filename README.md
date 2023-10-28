@@ -1,3 +1,7 @@
+## Producer-Dashboard
+
+Projeto criado utilizando o framework Next.JS
+
 ## Rodando o projeto
 
 Primeiro, instale as dependências:
