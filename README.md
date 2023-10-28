@@ -57,5 +57,5 @@ BFF (jsonServer) hospedado no firebase functions: [https://bffjsonserver-z37l2eh
 ### Página Editar produtor
 Possui os mesmos campos de [criação](#Criar-produtor), porém vêm com o formulário já preenchido.
 
-### [BFF](/bff)
-Foi utilizado a biblioteca [JSONServer](https://www.npmjs.com/package/json-server) para a sua criação.
+### [BFF](/functions)
+Foi utilizado a biblioteca [JSONServer](https://www.npmjs.com/package/json-server) para a sua criação e hospedado no Firebase Functions de forma gratuita.
